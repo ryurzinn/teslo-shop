@@ -16,8 +16,10 @@
 ```
 docker compose up -d
 ```
-6. Ejecutar SEED (SEED llena la base de datos con data)
+
+6. Levantar: ```yarn start:dev``` 
+
+7. Ejecutar SEED (SEED llena la base de datos con data)
 ```
 http://localhost:3000/api/seed
 ```
-6. Levantar: ```yarn start:dev``` 
