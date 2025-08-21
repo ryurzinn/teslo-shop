@@ -38,8 +38,6 @@ export class AuthService {
       token: this.getJwtToken({id: user.id})
     };
 
-      // TODO: Retornar el JWT de ACCESO
-
     } catch (error) {
       this.handleDBErrors(error);
     }
@@ -67,6 +65,13 @@ export class AuthService {
     };
   
 
+  }
+  async checkAuthStatus(user: User) {
+    return {
+      ...user,
+      token: this.getJwtToken({id: user.id})
+    };
+  
   }
 
   private getJwtToken(payload: JwtPayload) {

@@ -1,3 +1,4 @@
+import * as bcrypt from 'bcrypt';
 // Modelo  de data inicial para el SEED
 interface SeedProduct {
     description: string;
@@ -819,25 +820,25 @@ export const initialData: SeedData = {
         {
             email: 'test1@google.com',
             fullName: "Test One",
-            password: "Abc123",
+            password: bcrypt.hashSync('Abc123', 10),
             roles: ['admin']
         },
         {
             email: 'test2@google.com',
             fullName: "Test Two",
-            password: "Abc123",
+            password:  bcrypt.hashSync('Abc123', 10),
             roles: ['user', 'super']
         },
         {
             email: 'test3@google.com',
             fullName: "Test Three",
-            password: "Abc123",
+            password:  bcrypt.hashSync('Abc123', 10),
             roles: ['user']
         },
         {
             email: 'test4@google.com',
             fullName: "test4",
-            password: "Abc123",
+            password:  bcrypt.hashSync('Abc123', 10),
             roles: ['user']
         },
     ]

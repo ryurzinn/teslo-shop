@@ -8,6 +8,8 @@ import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import {validate as isUUID} from 'uuid';
 import { ProductImage } from './entities';
 import { User } from 'src/auth/entities/user.entity';
+import { CreateUserDto } from 'src/auth/dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class ProductsService {
@@ -15,6 +17,9 @@ export class ProductsService {
   private readonly logger = new Logger('ProductsService');
 
   constructor(
+
+     @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
 
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
@@ -32,14 +37,18 @@ export class ProductsService {
 
       const { images = [], ...productDetails} = createProductDto;
 
+
       const product = this.productRepository.create({
         ...productDetails,
         images: images.map( image => this.productImageRepository.create({ url: image }) ),
         user,
       });
+   
+
       await this.productRepository.save(product);
 
       return { ...product, images: images};
+      
 
     } catch (error) {
       this.handleDBExceptions(error);
